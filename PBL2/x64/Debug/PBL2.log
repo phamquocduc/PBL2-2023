@@ -1,0 +1,7 @@
+﻿  CAUTHU.cpp
+  DOIBONG.cpp
+E:\workspace\c++\PBL2-2023\PBL2\DOIBONG.cpp(44,31): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  MAINPBL2.cpp
+  Generating Code...
+E:\workspace\c++\PBL2-2023\PBL2\CAUTHU.cpp(39): warning C4715: 'CauThu::AddPlayer': not all control paths return a value
+  PBL2.vcxproj -> E:\workspace\c++\PBL2-2023\x64\Debug\PBL2.exe
