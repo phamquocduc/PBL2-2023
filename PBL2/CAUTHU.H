@@ -50,7 +50,9 @@ public:
 
 	void getShortestPlayer(vector<CauThu>& listPlayerCT);
 
-	void getPlayer();
+	int handleModifyPlayer(vector<CauThu>& listPlayerCT, string ID);
+
+	void getPlayer() const;
 
 };
 

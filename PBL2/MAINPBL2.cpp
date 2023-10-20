@@ -17,6 +17,10 @@ void setDataCTFromdataDb(vector<CauThu>& listPlayerCT, const vector<doibong>& da
     }
 }
 
+void setCTvaoDB(const CauThu &t, vector<CauThu> &danhsachcauthu) {
+    danhsachcauthu.push_back(t);
+}
+
 void setDatDBFromFile(vector<doibong>& danhSachDoiBong) {
     ifstream file("E:\\dataD\\doibong.txt");
     if (file.is_open()) {
@@ -98,9 +102,6 @@ void menu() {
     cout << "**********************************************" << endl;
 }
 
-void luucauthuvaodoibong(vector<doibong> danhsachdoibong) {
-
-}
 
 void luuThongTinDoiBong(const vector<doibong>& danhSachDoiBong) {
     ofstream file("E:\\dataD\\doibong.txt");
@@ -150,6 +151,11 @@ void luuThongTinCauThu(const vector<CauThu>& listPlayerCT) {
         cout << "Khong the mo tep tin doibong.txt." << endl;
     }
 }
+
+void suacauthutrongdanhsach(const vector<CauThu> &listPlayerCT, const vector<doibong> &danhSachDoiBong) {
+
+}
+
 int main() {
     vector<doibong> danhSachDoiBong;
     setDatDBFromFile(danhSachDoiBong);
@@ -387,6 +393,12 @@ int main() {
                     check = t.AddPlayer(listPlayerCT);
                     if (check == 2) {
                         listPlayerCT.push_back(t);
+                        for (auto &db : danhSachDoiBong) {
+                            if (t.getTendoibong() == db.getTenDoiBong()) {
+                                db.themcauthuvaodanhsach(t);
+                                luuThongTinDoiBong(danhSachDoiBong);
+                            }
+                        }
                         cout << "nhap du lieu thanh cong !" << endl;
                         break;
                     }
@@ -405,7 +417,7 @@ int main() {
             {
                 CauThu t;
                 t.modifyPlayer(listPlayerCT);
-
+                luuThongTinDoiBong(danhSachDoiBong);
                 luuThongTinCauThu(listPlayerCT);
             }
             break;

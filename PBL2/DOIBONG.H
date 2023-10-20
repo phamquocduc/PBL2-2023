@@ -14,7 +14,7 @@ public:
     doibong(string, string, string, vector<CauThu>& danhsachcauthu);
     void suadoibong(string, string, string);
     void themcauthuvaodanhsach(CauThu& t);
-    void xoacauthukhoids(string);
+    void xoacauthukhoids(string);;
 
     string getTenDoiBong() const;
     string getDiaPhuong() const;

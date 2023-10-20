@@ -19,6 +19,7 @@ string CauThu::getID() const {
 }
 
 int CauThu::AddPlayer(vector<CauThu> listPlayerCT) {
+	string cccd;
 	cout << "nhap CCCD : "; getline(cin, this->id);
 	for (int i = 0; i < listPlayerCT.size(); i++) {
 		if (listPlayerCT[i].getID() == this->id) {
@@ -67,13 +68,17 @@ void CauThu::modifyPlayer(vector<CauThu>& listPlayerCT) {
 			if (select == "yes") {
 				int selection;
 				do {
-					selection = i->AddPlayer(listPlayerCT);
-				} while (selection);
-				cout << "Sua doi thanh cong!!!" << endl;
+					selection = i->handleModifyPlayer(listPlayerCT, i->getID());
+					if (selection == 2) {
+						cout << "Sua doi thanh cong!!!" << endl;
+					}
+				} while (selection != 2);
+				
 			}
 			if (select == "no") {
 				int choose;
 				i->getPlayer();
+				cout << "8. Thuoc doi bong: " << i->getTendoibong() << endl;
 				cout << "Chon noi dung can sua : ";
 				cin >> choose;
 				cin.ignore();
@@ -84,6 +89,7 @@ void CauThu::modifyPlayer(vector<CauThu>& listPlayerCT) {
 					cout << i->id << " --> ";
 					cin >> _id;
 					for (auto j = listPlayerCT.begin(); j != listPlayerCT.end(); j++) {
+						if (j->id == i->id) continue;
 						if (_id == j->id) {
 							cout << "Sua doi that bai! So CCCD nay da ton tai! " << endl;
 							break;
@@ -124,6 +130,14 @@ void CauThu::modifyPlayer(vector<CauThu>& listPlayerCT) {
 					cout << i->position << " --> ";
 					getline(cin, i->position);
 					cout << "Sua doi thanh cong !" << endl;
+					break;
+				case 8:
+					cout << i->getTendoibong() << "-->";
+					getline(cin, i->doibong);
+					cout << "Sua doi thanh cong !" << endl;
+					break;
+				default:
+					cout << "Khong hop le !!" << endl;
 					break;
 				}
 			}
@@ -224,7 +238,32 @@ void CauThu::getShortestPlayer(vector<CauThu>& listPlayerCT) {
 	min.getPlayer();
 }
 
-void CauThu::getPlayer() {
+int CauThu::handleModifyPlayer(vector<CauThu>& listPlayerCT, string ID){
+	string cccd;
+	cout << "nhap CCCD : "; getline(cin, cccd);
+	for (int i = 0; i < listPlayerCT.size(); i++) {
+		if (listPlayerCT[i].getID() == ID) {
+			continue;
+		}
+		if (listPlayerCT[i].getID() == cccd) {
+			cout << "so can cuoc cong dan da ton tai!!" << endl;
+			return 0;
+		}
+		if (i == listPlayerCT.size() - 1) {
+			this->id = cccd;
+			cout << "nhap ho va ten : ";  getline(cin, this->fullName);
+			cout << "nhap quoc tich : "; getline(cin, this->intenational);
+			cout << "nhap ngay thang nam sinh : "; getline(cin, this->birth);
+			cout << "nhap chieu cao : "; getline(cin, this->height);
+			cout << "nhap can nang : "; getline(cin, this->weight);
+			cout << "nhap vi tri thi dau : "; getline(cin, this->position);
+			cout << "Thuoc doi bong : "; getline(cin, this->doibong);
+			return 2;
+		}
+	}
+}
+
+void CauThu::getPlayer() const{
 	cout << "1. " << "So CCCD : " << this->id << endl;
 	cout << "2. " << "Ho va ten : " << this->fullName << endl;
 	cout << "3. " << "Quoc tich : " << this->intenational << endl;
